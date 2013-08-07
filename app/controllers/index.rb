@@ -15,7 +15,13 @@ get '/categories' do
 end
 
 get '/category/:id' do
-  p params[:id]
-  p @categories = Category.find(params[:id])
-  erb :index
+  @posts = Post.where(category_id: params[:id])
+  erb :post_list
+end
+
+get '/create_post' do
+  p params
+  Post.create(params)
+  @posts=Post.all
+  erb :create_post
 end
